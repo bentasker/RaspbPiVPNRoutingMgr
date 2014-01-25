@@ -1,0 +1,3 @@
+# Example route - force requests to whatismyip.com through the VPN 
+# Assumes your VPN is handing out IP's in the 10.14.0.0/24 subnet
+route add 141.101.120.14 gw 10.14.0.5

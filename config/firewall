@@ -1,0 +1,2 @@
+# Example firewall rule - NAT all requests to www.whatismyip.com
+iptables -t nat -I POSTROUTING -d 141.101.120.14 -j SNAT --to-source 10.14.0.6
