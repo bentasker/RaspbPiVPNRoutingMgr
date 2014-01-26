@@ -15,9 +15,6 @@
 #
 # TODO: This script throws some avoidable warnings/errors, remove them
 
-echo "Currently broken, so disabled"
-exit 1
-
 DN=$1
 GW=$2
 NAT=$3
@@ -36,7 +33,7 @@ source /root/.vpn_config
 
 # Run a nameserver lookup on the domain
 
-IPS=$( nslookup "$DN" | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' );
+IPS=$( host "$DN" | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' );
 
 for i in $IPS
 do
