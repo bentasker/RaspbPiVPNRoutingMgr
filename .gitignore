@@ -4,3 +4,6 @@
 *.crt
 *.csr
 config/VPNs/*
+config/VPNS
+config/routes
+config/firewall
