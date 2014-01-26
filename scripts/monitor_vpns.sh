@@ -14,6 +14,8 @@
 # INSTDIR='/root/VPNs'
 #
 
+source /etc/profile
+
 
 # Load the config
 source /root/.vpn_config
@@ -28,13 +30,13 @@ do
 
   # See if there's an instance running for this vpn
 
-  ps aux | grep openvpn | grep "$i.conf" > /dev/null
+  /bin/ps aux | /bin/grep openvpn | /bin/grep "$i.conf" > /dev/null
   if [ "$?" == "1" ]
   then
     # Link seems to be down, bring it back up
 
     cd $INSTDIR/config/VPNs/$i
-    openvpn "${i}.conf"
+    /usr/sbin/openvpn "${i}.conf"
 
     # We've made changes
     CHANGES='yes'
