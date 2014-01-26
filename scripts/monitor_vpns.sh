@@ -50,8 +50,6 @@ then
 
   # Allow time for the tunnels to come up
   sleep 10
-
-  source $INSTDIR/config/routes
-  source $INSTDIR/config/firewall
+  source $INSTDIR/scripts/process_rules.sh
 
 fi
