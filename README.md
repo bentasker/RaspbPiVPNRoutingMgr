@@ -16,6 +16,9 @@ Usage
 There are two main ways to add a route - by destination IP or destination FQDN. If you use the latter, a DNS lookup will be performed whenever the routes are refreshed.
 
 > add\_vpn\_routing\_by\_ip.sh [dest ip] [gw ip] [nat ip] [Optional: 1 to prevent the route being saved for later refresh]
+
+Or to add by Domain Name
+
 > add\_vpn\_routing\_by\_name.sh [dest FQDN] [gw ip] [nat ip]
 
 
