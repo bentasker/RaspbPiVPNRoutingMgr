@@ -18,6 +18,7 @@
 IP=$1
 GW=$2
 NAT=$3
+NOSAVE=$4
 
 if [ "$NAT" == "" ]
 then
@@ -30,6 +31,15 @@ fi
 # Load the config
 source /root/.vpn_config
 
+
+# Add the route/rule
+route add $IP gw $GW
+iptables -t nat -I POSTROUTING -d $IP -j SNAT --to-source $NAT
+
+
+
+if [ ! "$NOSAVE" == "1" ]
+then
 
 DATE=$(date +'%Y-%m-%d %H:%M:%S')
 
@@ -48,8 +58,4 @@ iptables -t nat -I POSTROUTING -d $IP -j SNAT --to-source $NAT
 
 EOM
 
-
-# We've changed the rules, so need to force a reload of routes/fw etc
-# Actually a proper reload will come later, being lazy for now
-source $INSTDIR/config/routes
-source $INSTDIR/config/firewall
+fi

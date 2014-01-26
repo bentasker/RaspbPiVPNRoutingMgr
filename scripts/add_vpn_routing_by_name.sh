@@ -37,8 +37,8 @@ IPS=$( host "$DN" | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,
 
 for i in $IPS
 do
-  # Add the IP to the routing
-  $INSTDIR/scripts/add_vpn_routing_by_ip.sh $i $GW $NAT
+  # Add the IP to the routing but don't save it to the IP routing list
+  $INSTDIR/scripts/add_vpn_routing_by_ip.sh $i $GW $NAT 1
 done
 
 # Save the domain name to a config file
