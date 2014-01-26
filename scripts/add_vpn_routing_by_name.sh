@@ -42,6 +42,6 @@ do
 done
 
 # Save the domain name to a config file
-echo $DN >> $INSTDIR/conf/domains
+echo "$DN:$GW:$NAT" >> $INSTDIR/config/domains
 
 # TODO: A script to refresh the IPs used occassionally from the domains config file

@@ -40,4 +40,4 @@ do
 	  $INSTDIR/scripts/add_vpn_routing_by_ip.sh $i $GW $NAT 1
 	done
 
-done < $INSTDIR/conf/domains
+done < $INSTDIR/config/domains
