@@ -1,2 +1,23 @@
+# Check whether the custom chain exists
+iptables -t nat --list "selectiveroute" > /dev/null 2>&1
+if [ "$?" == "1" ]
+then
+  # Create the chain
+  iptables -t nat -N selectiveroute
+  
+fi
+
+iptables -t nat --list POSTROUTING | grep "selectiveroute" > /dev/null 2>&1
+if [ "$?" == "1" ]
+then
+    iptables -t nat -I POSTROUTING -j selectiveroute
+fi
+
+
+# Start by flushing any old rules
+iptables  -t nat -F selectiveroute
+iptables -t nat -A selectiveroute -j RETURN
+
+
 # Example firewall rule - NAT all requests to www.whatismyip.com
-iptables -t nat -I POSTROUTING -d 141.101.120.14 -j SNAT --to-source 10.14.0.6
+iptables -t nat -I selectiveroute -d 141.101.120.14 -j SNAT --to-source 10.14.0.6

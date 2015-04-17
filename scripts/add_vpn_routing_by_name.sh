@@ -33,7 +33,7 @@ source /root/.vpn_config
 
 # Run a nameserver lookup on the domain
 
-IPS=$( host "$DN" | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' );
+IPS=$( host `echo $DNFIELD 8.8.4.4 | awk -F\: '{print $1}'` | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' );
 
 for i in $IPS
 do

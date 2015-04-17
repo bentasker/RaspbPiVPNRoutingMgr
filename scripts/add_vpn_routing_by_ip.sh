@@ -31,10 +31,20 @@ fi
 # Load the config
 source /root/.vpn_config
 
+# Check whether the custom chain exists
+iptables -t nat --list "selectiveroute" > /dev/null 2>&1
+if [ "$?" == "1" ]
+then
+  # Create the chain
+  iptables -t nat -N selectiveroute
+  iptables -t nat -A selectiveroute -j RETURN
+  iptables -t nat -I POSTROUTING -j selectiveroute
+fi
+
 
 # Add the route/rule
 route add $IP gw $GW
-iptables -t nat -I POSTROUTING -d $IP -j SNAT --to-source $NAT
+iptables -t nat -I selectiveroute -d $IP -j SNAT --to-source $NAT -m comment --comment "VPNRoutingMgr"
 
 
 
@@ -54,7 +64,7 @@ EOM
 cat << EOM >> $INSTDIR/config/firewall
 
 # Added with the route_by_ip script $DATE
-iptables -t nat -I POSTROUTING -d $IP -j SNAT --to-source $NAT
+iptables -t nat -I selectiveroute -d $IP -j SNAT --to-source $NAT -m comment --comment "VPNRoutingMgr"
 
 EOM
 
