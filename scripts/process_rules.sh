@@ -18,6 +18,7 @@
 source /root/.vpn_config
 
 # Handle the predefined IPs
+source $INSTDIR/config/config
 source $INSTDIR/config/routes
 source $INSTDIR/config/firewall
 
@@ -28,7 +29,7 @@ while read -r DNFIELD
 do
 
 	# Run a nameserver lookup on the domain
-	IPS=$( host `echo $DNFIELD 8.8.4.4 | awk -F\: '{print $1}'` | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' );
+	IPS=$( host `echo $DNFIELD $UPSTREAM_DNS | awk -F\: '{print $1}'` | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' );
 	GW=$(echo $DNFIELD | awk -F\: '{print $2}')
 	NAT=$(echo $DNFIELD | awk -F\: '{print $2}')
 
